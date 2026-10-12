@@ -62,13 +62,13 @@ export function Specs() {
               <tbody>
                 {p.motors.map((m) => (
                   <tr key={m.id}>
-                    <th scope="row" className="mono c-cyan">{m.id}</th>
-                    <td>{m.powerKw.toFixed(2)}</td>
-                    <td>{m.torqueNm}</td>
-                    <td>{m.rpmAtMaxOutput.toLocaleString('en-US')}</td>
-                    <td>{m.rpmFree.toLocaleString('en-US')}</td>
-                    <td>{m.noLoad.p03.rpm.toLocaleString('en-US')} <small>({m.noLoad.p03.airLpm})</small></td>
-                    <td>{m.noLoad.p06.rpm.toLocaleString('en-US')} <small>({m.noLoad.p06.airLpm})</small></td>
+                    <th scope="row" className="mono c-cyan">MOTOR {m.id}</th>
+                    <td data-label="出力 kW">{m.powerKw.toFixed(2)}</td>
+                    <td data-label="トルク N·m">{m.torqueNm}</td>
+                    <td data-label="最大出力時 rpm">{m.rpmAtMaxOutput.toLocaleString('en-US')}</td>
+                    <td data-label="自由回転数 rpm">{m.rpmFree.toLocaleString('en-US')}</td>
+                    <td data-label="参考 0.3 MPa rpm (L/min)">{m.noLoad.p03.rpm.toLocaleString('en-US')} <small>({m.noLoad.p03.airLpm})</small></td>
+                    <td data-label="参考 0.6 MPa rpm (L/min)">{m.noLoad.p06.rpm.toLocaleString('en-US')} <small>({m.noLoad.p06.airLpm})</small></td>
                   </tr>
                 ))}
               </tbody>

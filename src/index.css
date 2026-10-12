@@ -37,6 +37,7 @@
   box-sizing: border-box;
 }
 html {
+  overflow-x: hidden;
   scroll-behavior: smooth;
   scroll-padding-top: 72px;
   -webkit-text-size-adjust: 100%;
@@ -1663,7 +1664,17 @@ select {
 .sheet {
   padding: clamp(18px, 3vw, 34px);
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 28px;
+}
+.sheet > *,
+.sheet__cols > *,
+.sheet__kpis > *,
+.lab__grid > *,
+.mech__grid > *,
+.cmp-cols > *,
+.legend__inner > * {
+  min-width: 0;
 }
 .sheet__head {
   display: flex;
@@ -1752,6 +1763,8 @@ select {
 }
 .table-wrap {
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
   border-radius: 10px;
   border: 1px solid var(--line);
 }
@@ -1801,6 +1814,9 @@ select {
 .dl dt {
   color: var(--muted);
   white-space: nowrap;
+}
+.dl dd {
+  overflow-wrap: anywhere;
 }
 .dl dd {
   margin: 0;
@@ -2020,6 +2036,117 @@ select {
 @media (max-width: 640px) {
   body {
     font-size: 14px;
+  }
+  /* --- hero: keep the model clear of the readout --- */
+  .hero__stage {
+    top: 40%;
+    bottom: 64px;
+  }
+  .hero__readout {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px 12px;
+    bottom: 18px;
+    left: auto;
+    right: var(--gutter);
+    width: auto;
+    padding: 8px 12px;
+    font-size: 10.5px;
+  }
+  .hero__readout .ro-row {
+    border: 0;
+    padding: 0;
+  }
+  .hero__readout .ro-row:first-child .ro-k,
+  .hero__readout .ro-row .ro-k {
+    display: none;
+  }
+  .hero__readout .ro-v b {
+    font-size: 13px;
+  }
+  .hero__scroll {
+    bottom: 26px;
+  }
+  .hero__hud {
+    display: none;
+  }
+  /* --- spec sheet --- */
+  .sheet__head {
+    align-items: flex-start;
+  }
+  .sheet__src {
+    flex-wrap: wrap;
+  }
+  .sheet__cat {
+    font-size: 12px;
+  }
+  .dl {
+    grid-template-columns: minmax(84px, auto) minmax(0, 1fr);
+    gap: 6px 12px;
+    font-size: 12.5px;
+  }
+  .dl dt {
+    white-space: normal;
+  }
+  /* motor table → one card per motor */
+  .table-wrap {
+    border: 0;
+    overflow: visible;
+  }
+  .tbl thead {
+    display: none;
+  }
+  .tbl,
+  .tbl tbody {
+    display: block;
+  }
+  .tbl tr {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 14px;
+    margin-bottom: 10px;
+    padding: 10px 14px 6px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.22);
+  }
+  .tbl tbody tr:hover {
+    background: rgba(0, 0, 0, 0.22);
+  }
+  .tbl th[scope='row'] {
+    grid-column: 1 / -1;
+    padding: 0 0 6px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 4px;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+  }
+  .tbl td {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 6px 0;
+    border: 0;
+    text-align: left;
+    white-space: normal;
+  }
+  .tbl td::before {
+    content: attr(data-label);
+    font-family: var(--font-body);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0;
+  }
+  .legend__list li {
+    grid-template-columns: 70px 1fr;
+  }
+  .cmp-card__tag {
+    display: none;
+  }
+  .mech__controls {
+    gap: 10px 14px;
   }
   .nav {
     height: 56px;
